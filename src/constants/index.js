@@ -8,274 +8,154 @@ export const myProjects = [
       "Built a scalable application with ASP.NET Core MVC, integrating global platforms like Amazon for domestic delivery.",
       "Implemented secure authentication and database management using ASP.NET Core Identity and Entity Framework Core.",
       "Designed a responsive frontend with Tailwind CSS, enhancing user experience.",
-      "Added payment systems, localization, and product filtering for functionality improvements.",
+      "Added payment systems, localization, and product filtering for functionality.",
     ],
-    href: "",
-    logo: "",
-    image: "/assets/projects/accessories.jpg",
-    tags: [
-      {
-        id: 1,
-        name: "C#",
-        path: "/assets/logos/csharp.svg",
-      },
-      {
-        id: 2,
-        name: ".Net",
-        path: "/assets/logos/dotnet.svg",
-      },
-      {
-        id: 3,
-        name: "Ef Core",
-        path: "/assets/logos/efcore.png",
-      },
-      {
-        id: 4,
-        name: "TailwindCSS",
-        path: "/assets/logos/tailwindcss.svg",
-      },
-    ],
+    technologies: ["ASP.NET Core", "C#", "Entity Framework", "SQL Server", "Tailwind CSS"],
+    image: "assets/projects/project1.png",
+    href: "https://github.com/yourusername/ecommerce-platform",
   },
   {
     id: 2,
-    title: "Authentication & Authorization System",
+    title: "Blog Website",
     description:
-      "A secure authentication and authorization system using Auth0 for seamless user management.",
+      "A modern and responsive blog platform developed using Next.js with server-side rendering, enabling users to create, edit, and comment on posts with JWT-based authentication.",
     subDescription: [
-      "Integrated Auth0 for authentication, supporting OAuth, JWT, and multi-factor authentication.",
-      "Implemented role-based access control (RBAC) for fine-grained user permissions.",
-      "Developed a React-based frontend with Tailwind CSS for a sleek user experience.",
-      "Connected to a secure SQLite database for user data storage.",
+      "Developed a full-stack blog platform using Next.js and Node.js for optimal performance.",
+      "Implemented JWT authentication and user management for secure access control.",
+      "Created a responsive design with modern UI/UX principles for better user engagement.",
+      "Integrated MongoDB for flexible data storage and real-time updates.",
     ],
-    href: "",
-    logo: "",
-    image: "/assets/projects/auth-system.jpg",
-    tags: [
-      {
-        id: 1,
-        name: "Auth0",
-        path: "/assets/logos/auth0.svg",
-      },
-      {
-        id: 2,
-        name: "React",
-        path: "/assets/logos/react.svg",
-      },
-      {
-        id: 3,
-        name: "SQLite",
-        path: "/assets/logos/sqlite.svg",
-      },
-      {
-        id: 4,
-        name: "TailwindCSS",
-        path: "/assets/logos/tailwindcss.svg",
-      },
-    ],
+    technologies: ["Next.js", "Node.js", "MongoDB", "JWT", "Tailwind CSS"],
+    image: "assets/projects/project2.png",
+    href: "https://github.com/yourusername/blog-website",
   },
   {
     id: 3,
-    title: "Blazor Web App",
+    title: "TORCS Self-Driving Car Game (Reinforcement Learning)",
     description:
-      "A modern, interactive web application built with Blazor WebAssembly and .NET Core.",
+      "Implemented a reinforcement learning agent to autonomously drive a car in the TORCS racing simulator environment, using techniques like Deep Q-Learning and reward shaping to optimize racing performance.",
     subDescription: [
-      "Developed a fully interactive Single Page Application (SPA) using Blazor WebAssembly.",
-      "Implemented API interactions using .NET Core for a robust backend.",
-      "Designed responsive UI components with Tailwind CSS for an enhanced UX.",
-      "Integrated SQLite for efficient client-side database storage.",
+      "Developed an AI agent using Deep Q-Learning for autonomous vehicle control in racing simulations.",
+      "Implemented reward shaping and state representation for optimal learning performance.",
+      "Integrated with TORCS simulator for realistic testing and validation.",
+      "Achieved competitive racing performance through iterative algorithm improvements.",
     ],
-    href: "",
-    logo: "",
-    image: "/assets/projects/blazor-app.jpg",
-    tags: [
-      {
-        id: 1,
-        name: "Blazor",
-        path: "/assets/logos/blazor.svg",
-      },
-      {
-        id: 2,
-        name: ".NET Core",
-        path: "/assets/logos/dotnetcore.svg",
-      },
-      {
-        id: 3,
-        name: "SQLite",
-        path: "/assets/logos/sqlite.svg",
-      },
-      {
-        id: 4,
-        name: "TailwindCSS",
-        path: "/assets/logos/tailwindcss.svg",
-      },
-    ],
+    technologies: ["Python", "TensorFlow", "OpenAI Gym", "TORCS", "Deep Learning"],
+    image: "assets/projects/project3.jpeg",
+    href: "https://github.com/yourusername/torcs-ai",
   },
   {
     id: 4,
-    title: "C++ Game Engine",
+    title: "Airport Management System",
     description:
-      "A lightweight C++ game engine designed for 2D and 3D game development.",
+      "A desktop-based application for managing airport operations, including flight scheduling, ticket booking, staff management, and reporting, built with JavaFX and MySQL.",
     subDescription: [
-      "Built a powerful rendering engine using OpenGL and C++.",
-      "Developed a physics engine with collision detection and particle effects.",
-      "Implemented a scripting system for easy game customization.",
-      "Optimized performance with multi-threading and efficient memory management.",
+      "Built a comprehensive airport management system using JavaFX for the frontend interface.",
+      "Implemented MySQL database for efficient data storage and retrieval.",
+      "Developed features for flight scheduling, ticket booking, and staff management.",
+      "Created detailed reporting and analytics for operational insights.",
     ],
-    href: "",
-    logo: "",
-    image: "/assets/projects/game-engine.jpg",
-    tags: [
-      {
-        id: 1,
-        name: "C++",
-        path: "/assets/logos/cplusplus.svg",
-      },
-      {
-        id: 2,
-        name: "C#",
-        path: "/assets/logos/csharp.svg",
-      },
-      {
-        id: 3,
-        name: "Git",
-        path: "/assets/logos/git.svg",
-      },
-      {
-        id: 4,
-        name: "Microsoft",
-        path: "/assets/logos/microsoft.svg",
-      },
-    ],
+    technologies: ["Java", "JavaFX", "MySQL", "JDBC", "Scene Builder"],
+    image: "assets/projects/project4.png",
+    href: "https://github.com/yourusername/airport-management",
   },
   {
     id: 5,
-    title: "WordPress Custom Theme",
+    title: "Portfolio Website",
     description:
-      "A fully customizable WordPress theme optimized for performance and SEO.",
+      "Personal portfolio website designed to showcase professional projects, skills, and experiences. Developed with a clean UI using React.js and Tailwind CSS for fast and responsive performance.",
     subDescription: [
-      "Developed a responsive WordPress theme using HTML5, CSS3, and JavaScript.",
-      "Integrated Tailwind CSS for modern styling and UI enhancements.",
-      "Optimized SEO and page speed using Vite.js for fast builds.",
-      "Implemented custom widgets and plugin compatibility for extended functionality.",
+      "Designed and developed a modern portfolio website using React.js and Tailwind CSS.",
+      "Implemented responsive design principles for optimal viewing across all devices.",
+      "Integrated smooth animations and transitions for enhanced user experience.",
+      "Optimized performance with lazy loading and efficient component rendering.",
     ],
-    href: "",
-    logo: "",
-    image: "/assets/projects/wordpress-theme.jpg",
-    tags: [
-      {
-        id: 1,
-        name: "WordPress",
-        path: "/assets/logos/wordpress.svg",
-      },
-      {
-        id: 2,
-        name: "HTML5",
-        path: "/assets/logos/html5.svg",
-      },
-      {
-        id: 3,
-        name: "CSS3",
-        path: "/assets/logos/css3.svg",
-      },
-      {
-        id: 4,
-        name: "Vite.js",
-        path: "/assets/logos/vitejs.svg",
-      },
-    ],
+    technologies: ["React.js", "Tailwind CSS", "JavaScript", "Framer Motion", "Three.js"],
+    image: "assets/projects/project5.png",
+    href: "https://github.com/yourusername/portfolio-website",
   },
   {
     id: 6,
-    title: "Online Learning Platform",
+    title: "Virtual Art Gallery",
     description:
-      "A web application that allows users to enroll in courses, watch video lectures, and take quizzes.",
+      "An online virtual gallery system created during an internship, allowing artists to display their artwork digitally, with features for user authentication, gallery events, and admin controls.",
     subDescription: [
-      "Built using Blazor WebAssembly for a seamless SPA experience.",
-      "Implemented video streaming with Azure Media Services.",
-      "Added a quiz system with dynamic question generation and real-time grading.",
-      "Integrated Stripe API for secure payment processing.",
+      "Developed a virtual art gallery platform using .NET Core and Angular technologies.",
+      "Implemented user authentication and role-based access control for artists and administrators.",
+      "Created an intuitive interface for artwork display and gallery event management.",
+      "Integrated SQL Server for reliable data storage and management.",
     ],
-    href: "",
-    logo: "",
-    image: "/assets/projects/elearning.jpg",
-    tags: [
-      {
-        id: 1,
-        name: "Blazor",
-        path: "/assets/logos/blazor.svg",
-      },
-      {
-        id: 2,
-        name: "Azure",
-        path: "/assets/logos/azure.svg",
-      },
-      {
-        id: 3,
-        name: "Stripe",
-        path: "/assets/logos/stripe.svg",
-      },
-      {
-        id: 4,
-        name: "TailwindCSS",
-        path: "/assets/logos/tailwindcss.svg",
-      },
+    technologies: [".NET Core", "Angular", "Bootstrap", "SQL Server", "Entity Framework"],
+    image: "assets/projects/project6.png",
+    href: "https://github.com/yourusername/virtual-art-gallery",
+  },
+  {
+    id: 7,
+    title: "Weather App",
+    description:
+      "Weather forecasting application displaying real-time weather conditions fetched from external APIs, supporting multi-city search and responsive user interface.",
+    subDescription: [
+      "Built a weather application using the MERN stack for real-time data display.",
+      "Integrated external weather APIs for accurate and up-to-date information.",
+      "Implemented multi-city search functionality for user convenience.",
+      "Created a responsive design that works seamlessly across all devices.",
     ],
+    technologies: ["MongoDB", "Express.js", "React.js", "Node.js", "Weather API"],
+    image: "assets/projects/project7.png",
+    href: "https://github.com/yourusername/weather-app",
+  },
+  {
+    id: 8,
+    title: "Gym Management Application",
+    description:
+      "A desktop-based gym management system to handle memberships, trainer schedules, equipment tracking, and payment processing, built with a Windows Forms frontend and .NET backend connected to SQL Server.",
+    subDescription: [
+      "Developed a comprehensive gym management system using C# and .NET Framework.",
+      "Implemented Windows Forms for an intuitive desktop user interface.",
+      "Created features for membership management, trainer scheduling, and equipment tracking.",
+      "Integrated SQL Server for reliable data storage and payment processing.",
+    ],
+    technologies: ["C#", ".NET Framework", "Windows Forms", "SQL Server", "ADO.NET"],
+    image: "assets/projects/project8.jpg",
+    href: "https://github.com/yourusername/gym-management",
   },
 ];
 
 export const mySocials = [
   {
-    name: "WhatsApp",
-    href: "",
-    icon: "/assets/socials/whatsApp.svg",
+    name: "GitHub",
+    icon: "assets/github.svg",
+    href: "https://github.com/mrayyan21197",
   },
   {
-    name: "Linkedin",
-    href: "https://www.linkedin.com/in/ali-sanati/",
-    icon: "/assets/socials/linkedIn.svg",
+    name: "LinkedIn",
+    icon: "assets/linkedin.svg",
+    href: "https://www.linkedin.com/in/muhammad-rayyan-b863a6311/",
   },
   {
-    name: "Instagram",
-    href: "https://www.instagram.com/ali.sanatidev/reels/",
-    icon: "/assets/socials/instagram.svg",
+    name: "Email",
+    icon: "assets/email.svg",
+    href: "mailto:ryaraid1293@gmail.com",
   },
 ];
 
 export const experiences = [
   {
-    title: "Software Developer",
-    job: "Security & Defense Projects",
-    date: "2021-2023",
-    contents: [
-      "Enhanced application security and developed new features, adhering to standards set by the Passive Defense Organization and National Cyberspace Center.",
-      "Designed and implemented intuitive map interfaces using MapsUI, enhancing user experience and enabling seamless interactive map integration.",
-      "Developed applications for industrial automation, leveraging C++ and the Fatek API for PLC communication.",
-      "Enhanced responsiveness and usability of applications using Windows Forms and WPF frameworks.",
-      "Executed XML to SVG conversions using X-DOM, ensuring dynamic and efficient data visualization.",
-    ],
+    year: "June 2025 – August 2025",
+    role: "Web Developer Intern",
+    company: "Codonomy",
+    description: `Contributed to a US client project where tasks were organized through user stories. Worked extensively with .NET Core, Angular, and SQL Server, implementing the repository pattern for scalable architecture. Actively involved in debugging, writing new features, and collaborating with the team to meet sprint goals. Gained experience with Azure DevOps for version control and task management.`,
+    technologies: [".NET Core", "Angular", "SQL Server", "Entity Framework", "Azure DevOps"],
   },
   {
-    title: "Back-End Developer",
-    job: "Car Manufacture",
-    date: "2023-2024",
-    contents: [
-      "Engineered systems for large-scale data ingestion and analysis, ensuring efficient data processing and storage.",
-      "Developed back-end systems enabling vehicle-to-cloud communication for telemetry, diagnostics, and remote control:",
-      "✅ Implemented secure APIs, following ISO 26262 automotive safety standards.",
-      "✅ Ensured data privacy for customers and partners through industry-compliant protocols.",
-      "✅ Delivered remote features like over-the-air updates, real-time tracking, and remote start capabilities.",
-    ],
-  },
-  {
-    title: "Freelance Developer",
-    job: "Self-Employed",
-    date: "2025-Present",
-    contents: [
-      "Created a personal portfolio using Three.js, React, Vite, and WebAPI to showcase technical expertise.",
-      "Continuously enhancing technical skills and expanding expertise in modern web development and back-end technologies.",
-    ],
-  },
+    year: "Summer 2024",
+    role: "Web Developer Intern",
+    company: "Synergy Pvt Ltd",
+    description: `Worked on multiple projects using .NET Core, Angular, and SQL Server. Implemented backend APIs, designed responsive front-end components, and collaborated with senior developers to deliver end-to-end features. Enhanced skills in debugging, database management, and building scalable full-stack applications.`,
+    technologies: [".NET Core", "Angular", "SQL Server", "Entity Framework"],
+  }
 ];
+
 export const reviews = [
   {
     name: "Jack",
@@ -326,3 +206,13 @@ export const reviews = [
     img: "https://robohash.org/eve",
   },
 ];
+
+// Add the missing constants that are used in other components
+export const HERO_CONTENT = `I am a results-driven full stack developer with over 3 years of experience architecting cutting-edge web applications. I specialize in building high-impact digital products using React, Angular, Next.js, and the MERN stack. With a relentless focus on performance, scalability, and user experience, I transform complex ideas into sleek, powerful solutions. I'm passionate about pushing boundaries, embracing innovation, and delivering technology that truly makes a difference.`;
+
+export const ABOUT_TEXT = `I am a passionate and versatile full stack developer with 3 years of professional experience building modern, user-centric web applications. I specialize in crafting seamless solutions using React, Angular, Next.js, Node.js, MySQL, MongoDB, and other cutting-edge technologies. Over the years, I have worked on a variety of projects, including freelance platforms, blog websites, weather apps, and enterprise-level management systems. My experience spans freelance work, internships at dynamic tech companies, and impactful research roles. I love turning ideas into reality through clean, efficient code and continuously seek to learn, innovate, and stay ahead in the fast-evolving tech world. When I'm not coding, you'll find me exploring new tech trends, designing side projects, or contributing to open-source communities.`;
+
+export const CONTACT = {
+  phoneNo: "+92 333-1915994",
+  email: "ryaraid1293@gmail.com",
+};

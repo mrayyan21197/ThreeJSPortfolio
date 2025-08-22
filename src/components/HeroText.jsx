@@ -7,6 +7,7 @@ const HeroText = () => {
     hidden: { opacity: 0, x: -50 },
     visible: { opacity: 1, x: 0 },
   };
+  
   return (
     <div className="z-10 mt-20 text-center md:mt-40 md:text-left rounded-3xl bg-clip-text">
       {/* Desktop View */}
@@ -18,7 +19,7 @@ const HeroText = () => {
           animate="visible"
           transition={{ delay: 1 }}
         >
-          Hi I'm Ali
+          Hi I'm Rayyan
         </motion.h1>
         <div className="flex flex-col items-start">
           <motion.p
@@ -51,9 +52,20 @@ const HeroText = () => {
             Web Solutions
           </motion.p>
         </div>
+        <motion.p
+          className="mt-6 text-lg text-neutral-400 max-w-2xl"
+          variants={variants}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 2.1 }}
+        >
+          Full-stack developer passionate about creating innovative digital experiences. 
+          Transforming ideas into powerful, scalable web applications with cutting-edge technology.
+        </motion.p>
       </div>
+      
       {/* Mobile View */}
-      <div className="flex- flex-col space-y-6 md:hidden">
+      <div className="flex flex-col space-y-6 md:hidden">
         <motion.p
           className="text-4xl font-medium"
           variants={variants}
@@ -61,7 +73,7 @@ const HeroText = () => {
           animate="visible"
           transition={{ delay: 1 }}
         >
-          Hi,I'm Ali
+          Hi, I'm Rayyan
         </motion.p>
         <div>
           <motion.p
@@ -85,7 +97,7 @@ const HeroText = () => {
             />
           </motion.div>
           <motion.p
-            className="text-4xl font-black text-neutral300"
+            className="text-4xl font-black text-neutral-300"
             variants={variants}
             initial="hidden"
             animate="visible"
@@ -94,6 +106,16 @@ const HeroText = () => {
             Web Applications
           </motion.p>
         </div>
+        <motion.p
+          className="text-base text-neutral-400"
+          variants={variants}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 2.1 }}
+        >
+          Full-stack developer passionate about creating innovative digital experiences. 
+          Transforming ideas into powerful, scalable web applications.
+        </motion.p>
       </div>
     </div>
   );
