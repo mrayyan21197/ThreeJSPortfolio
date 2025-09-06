@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion } from "motion/react";
 import { useInView } from "framer-motion";
 import { ABOUT_TEXT } from "../constants";
+import { Particles } from "../components/Particles";
 
 const About = () => {
   const containerRef = useRef(null);
@@ -12,8 +13,12 @@ const About = () => {
     { name: "Node.js", level: 85, color: "from-green-500 to-emerald-500" },
     { name: "TypeScript", level: 80, color: "from-blue-600 to-indigo-600" },
     { name: "Next.js", level: 75, color: "from-yellow-500 to-orange-500" },
-    { name: "AWS", level: 70, color: "from-orange-500 to-red-500" },
-    { name: "Docker", level: 75, color: "from-blue-500 to-indigo-500" },
+    { name: ".NET", level: 90, color: "from-purple-500 to-pink-500" },
+    { name: "n8n", level: 85, color: "from-green-600 to-teal-600" },
+    { name: "make.com", level: 88, color: "from-orange-600 to-red-600" },
+    { name: "Voice Agents", level: 85, color: "from-indigo-500 to-purple-500" },
+    { name: "Lead Generation", level: 87, color: "from-pink-500 to-rose-500" },
+    { name: "Automations", level: 90, color: "from-cyan-500 to-blue-500" },
   ];
 
   const stats = [
@@ -24,14 +29,21 @@ const About = () => {
   ];
 
   return (
-    <section className="c-space section-spacing" id="about">
-      <motion.div
-        ref={containerRef}
-        initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8 }}
-        className="space-y-16"
-      >
+    <section className="relative c-space section-spacing" id="about">
+      {/* Background Particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        <Particles />
+      </div>
+      
+      {/* Content */}
+      <div className="relative z-10">
+        <motion.div
+          ref={containerRef}
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="space-y-16"
+        >
         {/* Header */}
         <div className="text-center space-y-4">
           <motion.h2 
@@ -51,7 +63,7 @@ const About = () => {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Text Content */}
           <motion.div 
             className="space-y-6"
@@ -70,8 +82,8 @@ const About = () => {
 
             {/* Skills Progress Bars */}
             <div className="space-y-4">
-              <h4 className="text-xl font-semibold text-white">Technical Skills</h4>
-              <div className="space-y-3">
+              <h4 className="text-lg md:text-xl font-semibold text-white">Technical Skills</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {skills.map((skill, index) => (
                   <motion.div
                     key={skill.name}
@@ -106,11 +118,11 @@ const About = () => {
             transition={{ delay: 0.4 }}
           >
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 md:gap-4">
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  className="bg-gradient-to-br from-primary/20 to-primary/10 border border-white/10 rounded-xl p-6 text-center backdrop-blur-sm"
+                  className="bg-gradient-to-br from-primary/20 to-primary/10 border border-white/10 rounded-xl p-4 md:p-6 text-center backdrop-blur-sm"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ delay: 0.6 + index * 0.1 }}
@@ -200,7 +212,8 @@ const About = () => {
             </motion.button>
           </div>
         </motion.div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 };

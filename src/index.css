@@ -53,6 +53,9 @@ body {
   color: white;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .c-space {
@@ -60,7 +63,31 @@ body {
 }
 
 .hover-animation {
-  @apply hover:-translate-y-1 duration-200;
+  @apply hover:-translate-y-1 duration-300 ease-out;
+}
+
+/* Enhanced hover effects */
+.hover-glow {
+  @apply transition-all duration-300 ease-out;
+}
+
+.hover-glow:hover {
+  @apply shadow-lg shadow-lavender/25;
+}
+
+/* Smooth transitions for all interactive elements */
+.smooth-transition {
+  @apply transition-all duration-300 ease-out;
+}
+
+/* Modern glass morphism effect */
+.glass-morphism {
+  @apply bg-white/5 backdrop-blur-md border border-white/10;
+}
+
+/* Enhanced button styles */
+.btn-modern {
+  @apply relative px-6 py-3 text-sm font-medium rounded-xl bg-gradient-to-r from-lavender to-royal text-white transition-all duration-300 hover:shadow-lg hover:shadow-lavender/25 hover:scale-105 active:scale-95;
 }
 
 .section-spacing {
@@ -135,4 +162,123 @@ body {
 
 .field-input-focus {
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #7a57db, #5c33cc);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #8a67eb, #6c43dc);
+}
+
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Smooth animations for better performance */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-smooth {
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Modern focus styles */
+.focus-modern:focus {
+  @apply outline-none ring-2 ring-lavender/50 ring-offset-2 ring-offset-primary;
+}
+
+/* Enhanced card hover effects */
+.card-hover {
+  @apply transition-all duration-300 ease-out hover:transform hover:scale-105 hover:shadow-xl hover:shadow-lavender/10;
+}
+
+/* Mobile-first responsive design improvements */
+@media (max-width: 640px) {
+  .c-space {
+    @apply px-4;
+  }
+  
+  .section-spacing {
+    @apply min-h-screen mt-16;
+  }
+  
+  .text-heading {
+    @apply text-2xl;
+  }
+  
+  /* Mobile-optimized project cards */
+  .project-card-mobile {
+    @apply h-auto min-h-[400px];
+  }
+  
+  /* Mobile navigation improvements */
+  .nav-ul {
+    @apply flex-col gap-2;
+  }
+  
+  .nav-li {
+    @apply w-full text-center py-3 px-4 rounded-lg;
+  }
+}
+
+/* Tablet responsive design */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .c-space {
+    @apply px-6;
+  }
+  
+  .text-heading {
+    @apply text-3xl;
+  }
+}
+
+/* Mobile touch improvements */
+@media (hover: none) and (pointer: coarse) {
+  .hover-animation:hover {
+    @apply transform-none;
+  }
+  
+  .card-hover:hover {
+    @apply transform-none scale-100;
+  }
+}
+
+/* Improved mobile scrolling */
+@media (max-width: 768px) {
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  body {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+}
+
+/* Mobile-optimized animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -91,7 +91,7 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Left Column - Contact Methods */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -160,7 +160,7 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="relative"
           >
-            <div className="bg-gradient-to-br from-primary/20 to-primary/10 border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
+            <div className="bg-gradient-to-br from-primary/20 to-primary/10 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-sm">
               <h3 className="text-2xl font-bold text-white mb-6">Send Me a Message</h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">

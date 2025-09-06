@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import Project from "../components/Project";
 import { myProjects } from "../constants";
 import { motion, useMotionValue, useSpring } from "motion/react";
+import { Particles } from "../components/Particles";
 
 const Projects = React.memo(() => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -37,8 +38,15 @@ const Projects = React.memo(() => {
       className="relative c-space section-spacing"
       id="work"
     >
-      {/* Header Section */}
-      <motion.div
+      {/* Background Particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        <Particles />
+      </div>
+      
+      {/* Content */}
+      <div className="relative z-10">
+        {/* Header Section */}
+        <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -51,12 +59,12 @@ const Projects = React.memo(() => {
         </p>
         
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 md:mb-12">
           {categories.map((category) => (
             <motion.button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`px-4 md:px-6 py-2 md:py-3 rounded-full font-medium transition-all duration-300 text-sm md:text-base ${
                 selectedCategory === category
                   ? "bg-gradient-to-r from-lavender to-royal text-white shadow-lg"
                   : "bg-neutral-800/50 text-neutral-300 hover:bg-neutral-700/50 hover:text-white border border-neutral-700"
@@ -71,7 +79,7 @@ const Projects = React.memo(() => {
       </motion.div>
 
       {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
         {filteredProjects.map((project, index) => (
           <motion.div
             key={project.id}
@@ -80,7 +88,7 @@ const Projects = React.memo(() => {
             transition={{ duration: 0.6, delay: index * 0.1 }}
             viewport={{ once: true, margin: "-50px" }}
             whileHover={{ y: -10 }}
-            className="group"
+            className="group h-full"
           >
             <Project
               {...project}
@@ -158,7 +166,8 @@ const Projects = React.memo(() => {
             </svg>
           </motion.button>
         </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 });

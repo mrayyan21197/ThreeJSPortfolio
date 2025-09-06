@@ -33,7 +33,7 @@ const Project = React.memo(({
   // Memoize the project card to prevent unnecessary re-renders
   const projectCard = useMemo(() => (
     <motion.div
-      className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-primary/20 to-primary/10 p-0 backdrop-blur-sm transition-all duration-700 hover:border-lavender/30 hover:bg-primary/30"
+      className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-primary/20 to-primary/10 p-0 backdrop-blur-sm transition-all duration-700 hover:border-lavender/30 hover:bg-primary/30 h-full flex flex-col"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       whileHover={{ y: -10, scale: 1.02 }}
@@ -73,14 +73,14 @@ const Project = React.memo(({
       </div>
 
       {/* Project Content */}
-      <div className="p-6 space-y-4">
+      <div className="p-6 space-y-4 flex-1 flex flex-col">
         {/* Title */}
         <h3 className="text-xl font-bold text-white group-hover:text-lavender transition-colors duration-300 line-clamp-2">
           {title}
         </h3>
         
         {/* Description */}
-        <p className="text-neutral-300 text-sm leading-relaxed line-clamp-3">
+        <p className="text-neutral-300 text-sm leading-relaxed line-clamp-3 flex-1">
           {description}
         </p>
 

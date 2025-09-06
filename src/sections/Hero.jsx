@@ -6,14 +6,24 @@ import { useMediaQuery } from "react-responsive";
 import { easing } from "maath";
 import { Suspense } from "react";
 import ThreeLoader from "../components/ThreeLoader";
+import { Particles } from "../components/Particles";
 
 const Hero = () => {
   const isMobile = useMediaQuery({ maxWidth: 853 });
   return (
-    <section className="flex items-start justify-center min-h-screen overflow-hidden md:items-start md:justify-start c-space" id="home">
-      <HeroText />
+    <section className="relative flex items-start justify-center min-h-screen overflow-hidden md:items-start md:justify-start c-space px-4 md:px-0" id="home">
+      {/* Background Particles */}
+      <div className="absolute inset-0 overflow-hidden z-0">
+        <Particles />
+      </div>
+      
+      {/* Content */}
+      <div className="relative z-10 w-full">
+        <HeroText />
+      </div>
+      
       <figure
-        className="absolute inset-0"
+        className="absolute inset-0 z-5"
         style={{ width: "100vw", height: "100vh" }}
       >
         <Canvas camera={{ position: [0, 0.5, 5] }}>
