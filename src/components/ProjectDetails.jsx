@@ -108,6 +108,7 @@ const ProjectDetails = ({
             {href && (
               <a 
                 href={href}
+                onClick={(e)=>e.preventDefault()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 font-medium text-lavender border border-lavender/30 rounded-lg hover:bg-lavender/10 transition-colors"

@@ -1,6 +1,36 @@
 export const myProjects = [
   {
     id: 1,
+    title: "BuyOneGetOne Platform",
+    description:
+      "A full-stack platform enabling businesses to publish and manage Buy-One-Get-One deals for free, providing analytics and admin controls.",
+    subDescription: [
+      "Built a scalable e-commerce platform with MERN stack for promoting Buy-One-Get-One deals.",
+      "Integrated analytics dashboard to track engagement, clicks, and sales performance.",
+      "Developed admin panel for monitoring business registrations and overall platform activity.",
+      "Implemented responsive UI using Tailwind, ShadCN, Origin UI, and Aceternity UI.",
+    ],
+    technologies: ["MongoDB", "Express.js", "React", "Node.js", "Tailwind CSS"],
+    image: "assets/projects/BuyOne.png",
+    href: "https://github.com/yourusername/buyonegetone-platform",
+  },
+  {
+    id: 2,
+    title: "AI-Powered HR & Resume Screening System",
+    description:
+      "An intelligent HR system that automates resume collection, scoring, and interview scheduling using AI workflows built with n8n and Google APIs.",
+    subDescription: [
+      "Developed an AI-integrated HR dashboard for automated candidate evaluation and shortlisting.",
+      "Built n8n workflows to extract and score resumes against job descriptions stored in MongoDB.",
+      "Integrated intelligent email listeners for real-time resume fetching and processing.",
+      "Automated interview scheduling and talent pool management using Google Calendar API.",
+    ],
+    technologies: ["React", "Node.js", "MongoDB", "n8n", "Google APIs"],
+    image: "assets/projects/HR.png",
+    href: "https://github.com/yourusername/hr-screening-system",
+  },
+  {
+    id: 3,
     title: "E-commerce Platform",
     description:
       "Facilitates purchases from international websites like Amazon and eBay, allowing customers to shop from these sites and have products delivered domestically.",
@@ -15,7 +45,7 @@ export const myProjects = [
     href: "https://github.com/yourusername/ecommerce-platform",
   },
   {
-    id: 2,
+    id: 4,
     title: "Blog Website",
     description:
       "A modern and responsive blog platform developed using Next.js with server-side rendering, enabling users to create, edit, and comment on posts with JWT-based authentication.",
@@ -30,10 +60,10 @@ export const myProjects = [
     href: "https://github.com/yourusername/blog-website",
   },
   {
-    id: 3,
+    id: 5,
     title: "TORCS Self-Driving Car Game (Reinforcement Learning)",
     description:
-      "Implemented a reinforcement learning agent to autonomously drive a car in the TORCS racing simulator environment, using techniques like Deep Q-Learning and reward shaping to optimize racing performance.",
+      "Implemented a reinforcement learning agent to autonomously drive a car in the TORCS racing simulator using Deep Q-Learning and reward shaping.",
     subDescription: [
       "Developed an AI agent using Deep Q-Learning for autonomous vehicle control in racing simulations.",
       "Implemented reward shaping and state representation for optimal learning performance.",
@@ -45,7 +75,7 @@ export const myProjects = [
     href: "https://github.com/yourusername/torcs-ai",
   },
   {
-    id: 4,
+    id: 6,
     title: "Airport Management System",
     description:
       "A desktop-based application for managing airport operations, including flight scheduling, ticket booking, staff management, and reporting, built with JavaFX and MySQL.",
@@ -60,7 +90,7 @@ export const myProjects = [
     href: "https://github.com/yourusername/airport-management",
   },
   {
-    id: 5,
+    id: 7,
     title: "Portfolio Website",
     description:
       "Personal portfolio website designed to showcase professional projects, skills, and experiences. Developed with a clean UI using React.js and Tailwind CSS for fast and responsive performance.",
@@ -75,7 +105,7 @@ export const myProjects = [
     href: "https://github.com/yourusername/portfolio-website",
   },
   {
-    id: 6,
+    id: 8,
     title: "Virtual Art Gallery",
     description:
       "An online virtual gallery system created during an internship, allowing artists to display their artwork digitally, with features for user authentication, gallery events, and admin controls.",
@@ -90,7 +120,7 @@ export const myProjects = [
     href: "https://github.com/yourusername/virtual-art-gallery",
   },
   {
-    id: 7,
+    id: 9,
     title: "Weather App",
     description:
       "Weather forecasting application displaying real-time weather conditions fetched from external APIs, supporting multi-city search and responsive user interface.",
@@ -105,7 +135,7 @@ export const myProjects = [
     href: "https://github.com/yourusername/weather-app",
   },
   {
-    id: 8,
+    id: 10,
     title: "Gym Management Application",
     description:
       "A desktop-based gym management system to handle memberships, trainer schedules, equipment tracking, and payment processing, built with a Windows Forms frontend and .NET backend connected to SQL Server.",
@@ -120,6 +150,7 @@ export const myProjects = [
     href: "https://github.com/yourusername/gym-management",
   },
 ];
+
 
 export const mySocials = [
   {
@@ -141,7 +172,7 @@ export const mySocials = [
 
 export const experiences = [
   {
-    year: "June 2025 – August 2025",
+    year: "June 2025 – September 2025",
     role: "Web Developer Intern",
     company: "Codonomy",
     description: `Contributed to a US client project where tasks were organized through user stories. Worked extensively with .NET Core, Angular, and SQL Server, implementing the repository pattern for scalable architecture. Actively involved in debugging, writing new features, and collaborating with the team to meet sprint goals. Gained experience with Azure DevOps for version control and task management.`,

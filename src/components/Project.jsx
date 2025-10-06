@@ -119,6 +119,7 @@ const Project = React.memo(({
           {href && (
             <motion.a
               href={href}
+              onClick={(e)=>e.preventDefault()}
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2 text-sm font-medium text-lavender border border-lavender/30 rounded-xl hover:bg-lavender/10 transition-all duration-300"
