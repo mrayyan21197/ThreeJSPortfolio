@@ -42,6 +42,7 @@ const About = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
           className="space-y-16"
         >
         {/* Header */}
@@ -51,6 +52,7 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2 }}
+            viewport={{ once: true }}
           >
             About Me
           </motion.h2>
@@ -59,6 +61,7 @@ const About = () => {
             initial={{ width: 0 }}
             animate={isInView ? { width: 96 } : {}}
             transition={{ delay: 0.4, duration: 0.8 }}
+            viewport={{ once: true }}
           />
         </div>
 
@@ -70,6 +73,7 @@ const About = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.3 }}
+            viewport={{ once: true }}
           >
             <div className="space-y-4">
               <h3 className="text-3xl font-bold text-white">
@@ -91,6 +95,7 @@ const About = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ delay: 0.5 + index * 0.1 }}
+                    viewport={{ once: true }}
                   >
                     <div className="flex justify-between text-sm">
                       <span className="text-neutral-300">{skill.name}</span>
@@ -102,6 +107,7 @@ const About = () => {
                         initial={{ width: 0 }}
                         animate={isInView ? { width: `${skill.level}%` } : {}}
                         transition={{ delay: 0.7 + index * 0.1, duration: 1 }}
+                        viewport={{ once: true }}
                       />
                     </div>
                   </motion.div>
@@ -116,6 +122,7 @@ const About = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.4 }}
+            viewport={{ once: true }}
           >
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-3 md:gap-4">
@@ -126,6 +133,7 @@ const About = () => {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ delay: 0.6 + index * 0.1 }}
+                  viewport={{ once: true }}
                   whileHover={{ scale: 1.05, y: -5 }}
                 >
                   <div className="text-3xl font-bold bg-gradient-to-r from-lavender to-royal bg-clip-text text-transparent">
@@ -189,6 +197,7 @@ const About = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.8 }}
+          viewport={{ once: true }}
         >
           <div className="bg-gradient-to-r from-primary/20 to-primary/10 border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
             <h4 className="text-2xl font-bold text-white mb-4">

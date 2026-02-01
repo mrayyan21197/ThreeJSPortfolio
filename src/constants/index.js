@@ -172,6 +172,13 @@ export const mySocials = [
 
 export const experiences = [
   {
+    year: "Nov 2025 - Present",
+    role: "Trainee Data Engineer",
+    company: "Folio3 Pvt Ltd",
+    description: `Engineered scalable ETL pipelines on Microsoft Azure to orchestrate seamless data ingestion and transformation workflows. Leveraged Azure Event Hubs for high-throughput real-time data streaming, ensuring low-latency processing. Utilized Databricks and Apache Spark to process large-scale datasets and optimize analytical queries. Designed interactive dashboards in Power BI to visualize key metrics, enabling data-driven business decisions.`,
+    technologies: ["Azure", "Databricks", "Spark", "Power BI", "ETL", "Apache Spark"],
+  },
+  {
     year: "June 2025 – September 2025",
     role: "Web Developer Intern",
     company: "Codonomy",

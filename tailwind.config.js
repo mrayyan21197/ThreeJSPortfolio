@@ -10,6 +10,19 @@ export default {
         lavender: '#a855f7',
         royal: '#3b82f6',
       },
+      animation: {
+        aurora: 'aurora 60s linear infinite',
+      },
+      keyframes: {
+        aurora: {
+          'from': {
+            backgroundPosition: '50% 50%, 50% 50%',
+          },
+          'to': {
+            backgroundPosition: '350% 50%, 350% 50%',
+          },
+        },
+      },
     },
   },
   plugins: [],
