@@ -1,177 +1,265 @@
-import React, { useState, useMemo } from "react";
-import Project from "../components/Project";
+import { motion } from "motion/react";
+import { ExternalLink } from "lucide-react";
 import { myProjects } from "../constants";
-import { motion, useMotionValue, useSpring } from "motion/react";
-import { Particles } from "../components/Particles";
 
-const Projects = React.memo(() => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [preview, setPreview] = useState(null);
-  
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const springX = useSpring(x, { damping: 10, stiffness: 50 });
-  const springY = useSpring(y, { damping: 10, stiffness: 50 });
-  
-  const handleMouseMove = (e) => {
-    x.set(e.clientX + 20);
-    y.set(e.clientY + 20);
-  };
-  
-  // Get unique categories from projects
-  const categories = useMemo(() => {
-    const allCategories = ["All", ...new Set(myProjects.flatMap(project => project.technologies))];
-    return allCategories.slice(0, 8); // Limit to 8 categories
-  }, []);
-  
-  // Filter projects based on selected category
-  const filteredProjects = useMemo(() => {
-    if (selectedCategory === "All") return myProjects;
-    return myProjects.filter(project => 
-      project.technologies?.some(tech => tech === selectedCategory)
-    );
-  }, [selectedCategory]);
-  
-  return (
-    <section
-      onMouseMove={handleMouseMove}
-      className="relative c-space section-spacing"
-      id="work"
-    >
-      {/* Background Particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        <Particles />
-      </div>
-      
-      {/* Content */}
-      <div className="relative z-10">
-        {/* Header Section */}
-        <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center mb-16"
+const FEATURED_IDS = [1, 2, 3];
+
+const TECH_TAGS = {
+  1: "MERN · TAILWIND · ANALYTICS",
+  2: "REACT · NODE · N8N · AI",
+  3: "ASP.NET · C# · SQL SERVER",
+};
+
+const FeaturedCard = ({ project, index }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: index * 0.1 }}
+    viewport={{ once: true, margin: "-80px" }}
+    className="glow-card flex flex-col lg:flex-row gap-8"
+    style={{
+      background: "#121212",
+      border: "1px solid #212121",
+      borderRadius: "12px",
+      padding: "32px",
+    }}
+  >
+    {/* Left: info */}
+    <div className="flex-1 flex flex-col gap-4 justify-center min-w-0">
+      <span
+        style={{
+          color: "#22d472",
+          fontSize: "10px",
+          fontFamily: "'JetBrains Mono', monospace",
+          letterSpacing: "0.1em",
+        }}
       >
-        <h2 className="text-heading mb-4">My Creative Portfolio</h2>
-        <p className="text-lg text-neutral-300 max-w-3xl mx-auto mb-8">
-          Explore my collection of innovative projects, each crafted with precision and creativity 
-          to deliver exceptional user experiences and cutting-edge solutions.
-        </p>
-        
-        {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 md:mb-12">
-          {categories.map((category) => (
-            <motion.button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 md:px-6 py-2 md:py-3 rounded-full font-medium transition-all duration-300 text-sm md:text-base ${
-                selectedCategory === category
-                  ? "bg-gradient-to-r from-lavender to-royal text-white shadow-lg"
-                  : "bg-neutral-800/50 text-neutral-300 hover:bg-neutral-700/50 hover:text-white border border-neutral-700"
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {category}
-            </motion.button>
-          ))}
-        </div>
-      </motion.div>
+        {TECH_TAGS[project.id] ||
+          project.technologies.slice(0, 3).join(" · ").toUpperCase()}
+      </span>
 
-      {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
-        {filteredProjects.map((project, index) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            viewport={{ once: true, margin: "-50px" }}
-            whileHover={{ y: -10 }}
-            className="group h-full"
+      <h3
+        style={{
+          fontFamily: "'Sora', sans-serif",
+          fontSize: "22px",
+          fontWeight: 700,
+          letterSpacing: "-0.02em",
+          color: "#f2f2f2",
+        }}
+      >
+        {project.title}
+      </h3>
+
+      <p
+        style={{
+          color: "#6b6b6b",
+          fontSize: "14px",
+          lineHeight: 1.7,
+          maxWidth: "480px",
+        }}
+      >
+        {project.description}
+      </p>
+
+      <div className="flex flex-wrap gap-2">
+        {project.technologies.map((tech) => (
+          <span
+            key={tech}
+            style={{
+              background: "#1a1a1a",
+              border: "1px solid #212121",
+              color: "#6b6b6b",
+              fontSize: "10px",
+              fontFamily: "'JetBrains Mono', monospace",
+              padding: "3px 8px",
+              borderRadius: "4px",
+            }}
           >
-            <Project
-              {...project}
-              setPreview={setPreview}
-              index={index}
-            />
-          </motion.div>
+            {tech}
+          </span>
         ))}
       </div>
 
-      {/* No projects message */}
-      {filteredProjects.length === 0 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-center py-16"
-        >
-          <div className="text-6xl mb-4">🚀</div>
-          <h3 className="text-2xl font-bold text-white mb-2">No Projects Found</h3>
-          <p className="text-neutral-400">Try selecting a different category to see more projects.</p>
-        </motion.div>
-      )}
-
-      {/* Floating preview indicator */}
-      {preview && (
-        <motion.div
-          className="fixed pointer-events-none z-50 hidden lg:block"
-          style={{
-            left: springX,
-            top: springY,
-          }}
-          initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          exit={{ opacity: 0, scale: 0.8, rotate: 5 }}
-        >
-          <div className="relative">
-            <div className="w-40 h-40 rounded-2xl overflow-hidden border-4 border-white/20 shadow-2xl">
-              <img
-                src={preview}
-                alt="Project preview"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {/* Glow effect */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-lavender/20 to-royal/20 blur-xl -z-10" />
-          </div>
-        </motion.div>
-      )}
-
-      {/* Bottom CTA */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="text-center mt-20"
+      <a
+        href={project.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-1.5 w-fit mt-1"
+        style={{
+          color: "#22d472",
+          fontSize: "14px",
+          fontWeight: 500,
+          textDecoration: "none",
+          transition: "color 0.2s",
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.color = "#18a355")}
+        onMouseLeave={(e) => (e.currentTarget.style.color = "#22d472")}
       >
-        <div className="bg-gradient-to-r from-primary/20 to-primary/10 border border-white/10 rounded-3xl p-12 backdrop-blur-sm">
-          <h3 className="text-3xl font-bold text-white mb-4">
-            Ready to Start Your Next Project?
-          </h3>
-          <p className="text-lg text-neutral-300 mb-8 max-w-2xl mx-auto">
-            Let's collaborate to bring your ideas to life with cutting-edge technology and innovative solutions.
-          </p>
-          <motion.button
-            className="inline-flex items-center gap-3 px-8 py-4 text-white font-medium rounded-xl bg-gradient-to-r from-lavender to-royal hover:from-royal hover:to-lavender transition-all duration-300 shadow-lg hover:shadow-xl text-lg"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            Let's Talk
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </motion.button>
+        View project <ExternalLink className="w-3.5 h-3.5" />
+      </a>
+    </div>
+
+    {/* Right: screenshot */}
+    <div
+      className="w-full lg:w-80 xl:w-96 flex-shrink-0 rounded-lg overflow-hidden"
+      style={{ minHeight: "200px", background: "#1a1a1a" }}
+    >
+      <img
+        src={project.image}
+        alt={project.title}
+        className="w-full h-full object-cover object-top"
+        style={{ minHeight: "200px" }}
+      />
+    </div>
+  </motion.div>
+);
+
+const SmallCard = ({ project, index }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
+    viewport={{ once: true, margin: "-60px" }}
+    className="glow-card flex flex-col gap-3 h-full"
+    style={{
+      background: "#121212",
+      border: "1px solid #212121",
+      borderRadius: "12px",
+      padding: "24px",
+    }}
+  >
+    <div
+      className="w-full rounded-lg overflow-hidden flex-shrink-0"
+      style={{ height: "140px", background: "#1a1a1a" }}
+    >
+      <img
+        src={project.image}
+        alt={project.title}
+        className="w-full h-full object-cover object-top"
+      />
+    </div>
+
+    <h4
+      style={{
+        color: "#f2f2f2",
+        fontFamily: "'Sora', sans-serif",
+        fontSize: "15px",
+        fontWeight: 600,
+        letterSpacing: "-0.01em",
+      }}
+    >
+      {project.title}
+    </h4>
+
+    <p
+      style={{
+        color: "#6b6b6b",
+        fontSize: "12px",
+        lineHeight: 1.6,
+      }}
+      className="line-clamp-2"
+    >
+      {project.description}
+    </p>
+
+    <div className="flex flex-wrap gap-1.5 mt-auto">
+      {project.technologies.slice(0, 3).map((tech) => (
+        <span
+          key={tech}
+          style={{
+            background: "#1a1a1a",
+            border: "1px solid #212121",
+            color: "#6b6b6b",
+            fontSize: "9px",
+            fontFamily: "'JetBrains Mono', monospace",
+            padding: "2px 6px",
+            borderRadius: "3px",
+          }}
+        >
+          {tech}
+        </span>
+      ))}
+    </div>
+
+    <a
+      href={project.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        color: "#22d472",
+        fontSize: "12px",
+        fontFamily: "'JetBrains Mono', monospace",
+        textDecoration: "none",
+        marginTop: "4px",
+        transition: "color 0.2s",
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.color = "#18a355")}
+      onMouseLeave={(e) => (e.currentTarget.style.color = "#22d472")}
+    >
+      View project →
+    </a>
+  </motion.div>
+);
+
+const Projects = () => {
+  const featured = myProjects.filter((p) => FEATURED_IDS.includes(p.id));
+  const rest = myProjects.filter((p) => !FEATURED_IDS.includes(p.id));
+
+  return (
+    <section id="work" style={{ padding: "100px 0", background: "#0a0a0a" }}>
+      <div
+        className="max-sm:px-6"
+        style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 64px" }}
+      >
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          style={{
+            fontFamily: "'Sora', sans-serif",
+            fontSize: "clamp(36px, 5vw, 60px)",
+            fontWeight: 800,
+            letterSpacing: "-0.04em",
+            color: "#f2f2f2",
+            marginBottom: "64px",
+          }}
+        >
+          Projects.
+        </motion.h2>
+
+        {/* Featured full-width cards */}
+        <div className="flex flex-col gap-6 mb-20">
+          {featured.map((project, i) => (
+            <FeaturedCard key={project.id} project={project} index={i} />
+          ))}
         </div>
-        </motion.div>
+
+        {/* More projects grid */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          viewport={{ once: true }}
+          style={{
+            color: "#6b6b6b",
+            fontSize: "10px",
+            fontFamily: "'JetBrains Mono', monospace",
+            letterSpacing: "0.12em",
+            marginBottom: "24px",
+          }}
+        >
+          MORE PROJECTS
+        </motion.p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {rest.map((project, i) => (
+            <SmallCard key={project.id} project={project} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   );
-});
-
-Projects.displayName = 'Projects';
+};
 
 export default Projects;

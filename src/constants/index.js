@@ -172,11 +172,18 @@ export const mySocials = [
 
 export const experiences = [
   {
-    year: "Nov 2025 - Present",
-    role: "Trainee Data Engineer",
+    year: "May 2026 – Present",
+    role: "Data Engineer",
     company: "Folio3 Pvt Ltd",
-    description: `Engineered scalable ETL pipelines on Microsoft Azure to orchestrate seamless data ingestion and transformation workflows. Leveraged Azure Event Hubs for high-throughput real-time data streaming, ensuring low-latency processing. Utilized Databricks and Apache Spark to process large-scale datasets and optimize analytical queries. Designed interactive dashboards in Power BI to visualize key metrics, enabling data-driven business decisions.`,
-    technologies: ["Azure", "Databricks", "Spark", "Power BI", "ETL", "Apache Spark"],
+    location: "Islamabad, Pakistan",
+    description: `Designed and developed a scalable event-driven ETL pipeline for processing large medical imaging datasets on Microsoft Azure. Built serverless workflows using Azure Data Factory, Storage Queues, and Python-based Azure Durable Functions to orchestrate parallel processing tasks. Automated dataset validation, sensitive data scrubbing, and standardized image rendering across Azure Blob Storage data lakes. Developed resilient and cost-effective cloud solutions by decoupling data processing into modular serverless components. Also contributed to an in-house AI/ML product for project managers using OpenAI SDK, Gemini APIs, AI Agents, React, PostgreSQL, and SQLite.`,
+    technologies: ["Azure", "Azure Data Factory", "Python", "Durable Functions", "Blob Storage", "OpenAI SDK", "Gemini API", "React", "PostgreSQL", "SQLite"],
+    promotedFrom: {
+      year: "Nov 2025 – Apr 2026",
+      role: "Trainee Data Engineer",
+      description: `Worked on building ETL pipelines on Microsoft Azure to understand data ingestion and transformation workflows. Gained hands-on experience with Azure Event Hubs for real-time data streaming concepts. Explored Databricks and Apache Spark for learning distributed data processing fundamentals. Created Power BI dashboards to visualize datasets and derive meaningful insights.`,
+      technologies: ["Azure", "Azure Event Hubs", "Databricks", "Apache Spark", "Power BI", "ETL"],
+    },
   },
   {
     year: "June 2025 – September 2025",

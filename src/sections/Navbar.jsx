@@ -1,173 +1,121 @@
 import { useState } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
+import { Menu, X } from "lucide-react";
 
-function Navigation() {
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  };
-
-  return (
-    <ul className="flex items-center space-x-8">
-      <li>
-        <a 
-          className="nav-link relative text-neutral-300 hover:text-white transition-colors duration-300 font-medium cursor-pointer" 
-          onClick={() => scrollToSection('home')}
-        >
-          <span className="relative">
-            Home
-            <motion.span
-              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-lavender to-royal transition-all duration-300"
-              whileHover={{ width: "100%" }}
-            />
-          </span>
-        </a>
-      </li>
-      <li>
-        <a 
-          className="nav-link relative text-neutral-300 hover:text-white transition-colors duration-300 font-medium cursor-pointer" 
-          onClick={() => scrollToSection('about')}
-        >
-          <span className="relative">
-            About
-            <motion.span
-              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-lavender to-royal transition-all duration-300"
-              whileHover={{ width: "100%" }}
-            />
-          </span>
-        </a>
-      </li>
-      <li>
-        <a 
-          className="nav-link relative text-neutral-300 hover:text-white transition-colors duration-300 font-medium cursor-pointer" 
-          onClick={() => scrollToSection('work')}
-        >
-          <span className="relative">
-            Work
-            <motion.span
-              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-lavender to-royal transition-all duration-300"
-              whileHover={{ width: "100%" }}
-            />
-          </span>
-        </a>
-      </li>
-      <li>
-        <a 
-          className="nav-link relative text-neutral-300 hover:text-white transition-colors duration-300 font-medium cursor-pointer" 
-          onClick={() => scrollToSection('contact')}
-        >
-          <span className="relative">
-            Contact
-            <motion.span
-              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-lavender to-royal transition-all duration-300"
-              whileHover={{ width: "100%" }}
-            />
-          </span>
-        </a>
-      </li>
-    </ul>
-  );
-}
+const navLinks = [
+  { label: "Projects", target: "work" },
+  { label: "Stack", target: "stack" },
+  { label: "About", target: "about" },
+  { label: "Contact", target: "contact" },
+];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
+
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
     setIsOpen(false);
   };
-  
+
   return (
-    <motion.div 
-      className="fixed inset-x-0 z-50 w-full backdrop-blur-xl bg-primary/80 border-b border-white/10"
-      initial={{ y: -100, opacity: 0 }}
+    <motion.header
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 50,
+        background: "rgba(10,10,10,0.92)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        borderBottom: "1px solid #212121",
+      }}
+      initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="mx-auto c-space max-w-7xl">
-        <div className="flex items-center justify-between py-4 sm:py-6">
-          <motion.a
-            href="#home"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('home');
-            }}
-            className="text-2xl font-bold bg-gradient-to-r from-lavender to-royal bg-clip-text text-transparent hover:scale-105 transition-transform duration-300 cursor-pointer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+      <div
+        style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 64px" }}
+        className="max-sm:px-6 flex items-center justify-between h-14"
+      >
+        {/* Left: Name + tag */}
+        <button onClick={() => scrollTo("home")} className="flex items-center gap-2 cursor-pointer">
+          <span
+            className="text-fg font-bold text-base"
+            style={{ fontFamily: "'Sora', sans-serif", letterSpacing: "-0.02em" }}
           >
             Rayyan
-          </motion.a>
-          
+          </span>
+          <span
+            className="hidden sm:inline text-green text-[10px] font-mono border border-green/30 px-1.5 py-0.5 rounded"
+          >
+            Full-Stack Dev
+          </span>
+        </button>
+
+        {/* Center: Nav links */}
+        <nav className="hidden sm:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <button
+              key={link.target}
+              onClick={() => scrollTo(link.target)}
+              className="text-muted hover:text-fg text-sm transition-colors duration-200 cursor-pointer"
+            >
+              {link.label}
+            </button>
+          ))}
+        </nav>
+
+        {/* Right: CTA + mobile toggle */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => scrollTo("contact")}
+            className="hidden sm:block bg-green text-background text-xs font-semibold px-4 py-2 rounded cursor-pointer hover:bg-green-dark transition-colors duration-200"
+            style={{ borderRadius: "6px" }}
+          >
+            Hire me →
+          </button>
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex cursor-pointer text-neutral-300 hover:text-white focus:outline-none sm:hidden transition-colors duration-300"
+            className="sm:hidden text-muted hover:text-fg transition-colors p-1"
           >
-            <motion.img
-              src={isOpen ? "assets/close.svg" : "assets/menu.svg"}
-              className="w-6 h-6"
-              alt="toggle"
-              animate={{ rotate: isOpen ? 180 : 0 }}
-              transition={{ duration: 0.3 }}
-            />
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
-          
-          <nav className="hidden sm:flex">
-            <Navigation />
-          </nav>
         </div>
       </div>
-      
-      {isOpen && (
-        <motion.div
-          className="block overflow-hidden text-center sm:hidden bg-primary/95 border-t border-white/10"
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-        >
-          <nav className="py-6">
-            <div className="flex flex-col space-y-4">
-              <a 
-                onClick={() => scrollToSection('home')}
-                className="text-neutral-300 hover:text-white transition-colors duration-300 font-medium py-2 cursor-pointer"
+
+      {/* Mobile menu overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            style={{ background: "rgba(10,10,10,0.98)", borderTop: "1px solid #212121" }}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="overflow-hidden sm:hidden"
+          >
+            <nav className="flex flex-col gap-4 px-6 py-6">
+              {navLinks.map((link) => (
+                <button
+                  key={link.target}
+                  onClick={() => scrollTo(link.target)}
+                  className="text-muted hover:text-fg text-base transition-colors text-left cursor-pointer"
+                >
+                  {link.label}
+                </button>
+              ))}
+              <button
+                onClick={() => scrollTo("contact")}
+                className="mt-2 bg-green text-background text-sm font-semibold px-4 py-3 rounded cursor-pointer hover:bg-green-dark transition-colors"
               >
-                Home
-              </a>
-              <a 
-                onClick={() => scrollToSection('about')}
-                className="text-neutral-300 hover:text-white transition-colors duration-300 font-medium py-2 cursor-pointer"
-              >
-                About
-              </a>
-              <a 
-                onClick={() => scrollToSection('work')}
-                className="text-neutral-300 hover:text-white transition-colors duration-300 font-medium py-2 cursor-pointer"
-              >
-                Work
-              </a>
-              <a 
-                onClick={() => scrollToSection('contact')}
-                className="text-neutral-300 hover:text-white transition-colors duration-300 font-medium py-2 cursor-pointer"
-              >
-                Contact
-              </a>
-            </div>
-          </nav>
-        </motion.div>
-      )}
-    </motion.div>
+                Hire me →
+              </button>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 };
 

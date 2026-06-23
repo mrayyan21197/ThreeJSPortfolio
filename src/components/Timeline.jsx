@@ -1,6 +1,116 @@
-"use client";
-import { useScroll, useTransform, motion } from "framer-motion";
+import { useScroll, useTransform, motion } from "motion/react";
 import React, { useEffect, useRef, useState } from "react";
+
+const cardStyle = {
+  background: "#121212",
+  border: "1px solid #212121",
+  borderRadius: "12px",
+  padding: "24px",
+};
+
+const techChip = (tech) => (
+  <span
+    key={tech}
+    style={{
+      background: "rgba(34,212,114,0.08)",
+      border: "1px solid rgba(34,212,114,0.2)",
+      color: "#22d472",
+      fontSize: "10px",
+      fontFamily: "'JetBrains Mono', monospace",
+      padding: "3px 10px",
+      borderRadius: "4px",
+    }}
+  >
+    {tech}
+  </span>
+);
+
+const PromotedEntry = ({ data }) => (
+  <div style={{ marginTop: "20px", paddingLeft: "24px", position: "relative" }}>
+    {/* Connector line */}
+    <div
+      style={{
+        position: "absolute",
+        left: "0",
+        top: "0",
+        bottom: "0",
+        width: "1px",
+        background: "linear-gradient(to bottom, rgba(34,212,114,0.4), transparent)",
+      }}
+    />
+
+    {/* Label */}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+        marginBottom: "12px",
+      }}
+    >
+      <span
+        style={{
+          color: "#6b6b6b",
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: "9px",
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+        }}
+      >
+        ↑ Promoted from
+      </span>
+    </div>
+
+    {/* Sub-card */}
+    <div
+      style={{
+        background: "#0a0a0a",
+        border: "1px solid #212121",
+        borderRadius: "10px",
+        padding: "20px",
+      }}
+    >
+      {/* Role + year */}
+      <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", marginBottom: "12px" }}>
+        <span
+          style={{
+            color: "#f2f2f2",
+            fontFamily: "'Sora', sans-serif",
+            fontWeight: 600,
+            fontSize: "14px",
+            letterSpacing: "-0.01em",
+          }}
+        >
+          {data.role}
+        </span>
+        <span
+          style={{
+            color: "#6b6b6b",
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: "10px",
+          }}
+        >
+          {data.year}
+        </span>
+      </div>
+
+      <p
+        style={{
+          color: "#6b6b6b",
+          fontSize: "13px",
+          lineHeight: 1.75,
+          marginBottom: "16px",
+        }}
+      >
+        {data.description}
+      </p>
+
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+        {data.technologies?.map(techChip)}
+      </div>
+    </div>
+  </div>
+);
 
 export const Timeline = ({ data }) => {
   const ref = useRef(null);
@@ -8,18 +118,12 @@ export const Timeline = ({ data }) => {
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    const updateHeight = () => {
-      if (ref.current) {
-        const rect = ref.current.getBoundingClientRect();
-        setHeight(rect.height);
-      }
+    const update = () => {
+      if (ref.current) setHeight(ref.current.getBoundingClientRect().height);
     };
-    
-    updateHeight();
-    
-    // Only recalculate on window resize, not on every scroll
-    window.addEventListener('resize', updateHeight);
-    return () => window.removeEventListener('resize', updateHeight);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -31,77 +135,168 @@ export const Timeline = ({ data }) => {
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
-  // Check if data exists and has the correct structure
-  if (!data || !Array.isArray(data) || data.length === 0) {
-    return (
-      <div className="c-space section-spacing">
-        <h2 className="text-heading">My Work Experience</h2>
-        <p className="text-neutral-400 text-center">No experience data available</p>
-      </div>
-    );
-  }
+  if (!data || !Array.isArray(data) || data.length === 0) return null;
 
   return (
-    <div className="c-space section-spacing" ref={containerRef}>
-      <h2 className="text-heading">My Work Experience</h2>
-      <div ref={ref} className="relative pb-20">
+    <div
+      className="max-sm:px-6"
+      style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 64px" }}
+      ref={containerRef}
+    >
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        style={{
+          fontFamily: "'Sora', sans-serif",
+          fontSize: "clamp(36px, 5vw, 60px)",
+          fontWeight: 800,
+          letterSpacing: "-0.04em",
+          color: "#f2f2f2",
+          marginBottom: "48px",
+        }}
+      >
+        Work Experience.
+      </motion.h2>
+
+      <div ref={ref} style={{ position: "relative", paddingBottom: "80px" }}>
         {data.map((item, index) => (
           <div
             key={index}
-            className="flex justify-start pt-10 md:pt-40 md:gap-10"
+            className="flex justify-start"
+            style={{ paddingTop: index === 0 ? "12px" : "56px", gap: "48px" }}
           >
-            <div className="sticky z-40 flex flex-col items-center self-start max-w-xs md:flex-row top-40 lg:max-w-sm md:w-full">
-              <div className="absolute flex items-center justify-center w-10 h-10 rounded-full -left-[15px] bg-gradient-to-br from-lavender to-royal">
-                <div className="w-4 h-4 p-2 border rounded-full bg-neutral-800 border-neutral-700" />
-              </div>
-              <div className="flex-col hidden gap-2 text-xl font-bold md:flex md:pl-20 md:text-4xl text-neutral-300">
-                <h3>{item.year}</h3>
-                <h3 className="text-3xl text-neutral-400">{item.role}</h3>
-                <h3 className="text-3xl text-neutral-500">{item.company}</h3>
+            {/* Left sticky: date/role — desktop only */}
+            <div
+              className="sticky hidden md:flex flex-col"
+              style={{ top: "140px", width: "200px", minWidth: "200px", zIndex: 40 }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  left: "-22px",
+                  top: "4px",
+                  width: "10px",
+                  height: "10px",
+                  borderRadius: "50%",
+                  background: "#22d472",
+                  boxShadow: "0 0 10px rgba(34,212,114,0.5)",
+                }}
+              />
+              <div style={{ paddingLeft: "8px" }}>
+                <div
+                  style={{
+                    color: "#6b6b6b",
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: "10px",
+                    marginBottom: "6px",
+                  }}
+                >
+                  {item.year}
+                </div>
+                <div
+                  style={{
+                    color: "#f2f2f2",
+                    fontFamily: "'Sora', sans-serif",
+                    fontWeight: 700,
+                    fontSize: "15px",
+                    letterSpacing: "-0.02em",
+                    marginBottom: "4px",
+                  }}
+                >
+                  {item.role}
+                </div>
+                <div
+                  style={{
+                    color: "#22d472",
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: "11px",
+                  }}
+                >
+                  {item.company}
+                </div>
+                {item.location && (
+                  <div
+                    style={{
+                      color: "#6b6b6b",
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "10px",
+                      marginTop: "2px",
+                    }}
+                  >
+                    {item.location}
+                  </div>
+                )}
               </div>
             </div>
 
-            <div className="relative w-full pl-20 pr-4 md:pl-4">
-              <div className="block mb-4 text-2xl font-bold text-left text-neutral-300 md:hidden">
-                <h3>{item.year}</h3>
-                <h3>{item.role}</h3>
-                <h3 className="text-xl text-neutral-400">{item.company}</h3>
-              </div>
-              
-              <div className="mb-6">
-                <p className="mb-4 font-normal text-neutral-300 leading-relaxed">
-                  {item.description}
-                </p>
-                
-                {/* Technologies used */}
-                <div className="flex flex-wrap gap-2">
-                  {item.technologies?.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 text-xs font-medium bg-gradient-to-r from-lavender/20 to-royal/20 text-lavender rounded-full border border-lavender/30"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+            {/* Right: content card */}
+            <div style={{ flex: 1, minWidth: 0 }}>
+              {/* Mobile header */}
+              <div className="md:hidden" style={{ marginBottom: "16px" }}>
+                <div style={{ color: "#6b6b6b", fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", marginBottom: "4px" }}>
+                  {item.year}
+                </div>
+                <div style={{ color: "#f2f2f2", fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "16px", letterSpacing: "-0.02em" }}>
+                  {item.role}
+                </div>
+                <div style={{ color: "#22d472", fontFamily: "'JetBrains Mono', monospace", fontSize: "11px" }}>
+                  {item.company}
                 </div>
               </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                style={cardStyle}
+              >
+                <p style={{ color: "#6b6b6b", fontSize: "14px", lineHeight: 1.8, marginBottom: "16px" }}>
+                  {item.description}
+                </p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                  {item.technologies?.map(techChip)}
+                </div>
+              </motion.div>
+
+              {/* Promoted-from sub-entry */}
+              {item.promotedFrom && (
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.15 }}
+                  viewport={{ once: true }}
+                >
+                  <PromotedEntry data={item.promotedFrom} />
+                </motion.div>
+              )}
             </div>
           </div>
         ))}
-        
-        {/* Timeline line */}
+
+        {/* Timeline vertical line */}
         <div
           style={{
-            height: height + "px",
+            position: "absolute",
+            left: "1px",
+            top: 0,
+            width: "1px",
+            height: `${height}px`,
+            background: "#212121",
           }}
-          className="absolute md:left-1 left-1 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-700 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
         >
           <motion.div
             style={{
               height: heightTransform,
               opacity: opacityTransform,
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(to bottom, #22d472, rgba(34,212,114,0.1))",
+              width: "1px",
+              borderRadius: "1px",
             }}
-            className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-t from-purple-500 via-lavender/50 to-transparent from-[0%] via-[10%] rounded-full"
           />
         </div>
       </div>

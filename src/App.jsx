@@ -1,89 +1,73 @@
-import React, { Suspense, lazy, useEffect } from "react";
+import React, { Suspense, lazy } from "react";
 import Navbar from "./sections/Navbar";
 import Hero from "./sections/Hero";
-import Loader from "./components/Loader";
 
-// Lazy load components for better performance
 const About = lazy(() => import("./sections/About"));
 const Projects = lazy(() => import("./sections/Projects"));
+const TechStack = lazy(() => import("./sections/TechStack"));
 const Experiences = lazy(() => import("./sections/Experiences"));
+const GitHub = lazy(() => import("./sections/GitHub"));
 const Contact = lazy(() => import("./sections/Contact"));
-const Footer = lazy(() => import('./sections/Footer'));
+const Footer = lazy(() => import("./sections/Footer"));
+
+const SectionLoader = () => (
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "80px 0",
+      background: "#0a0a0a",
+    }}
+  >
+    <span
+      style={{
+        color: "#22d472",
+        fontFamily: "'JetBrains Mono', monospace",
+        fontSize: "12px",
+        letterSpacing: "0.1em",
+      }}
+    >
+      loading...
+    </span>
+  </div>
+);
 
 const App = () => {
-  useEffect(() => {
-    // Enhanced smooth scrolling with performance optimizations
-    const smoothScrollTo = (target, duration = 1000) => {
-      const targetElement = typeof target === 'string' ? document.querySelector(target) : target;
-      if (!targetElement) return;
-
-      const startPosition = window.pageYOffset;
-      const targetPosition = targetElement.offsetTop - 80; // Account for navbar height
-      const distance = targetPosition - startPosition;
-      let startTime = null;
-
-      const animation = (currentTime) => {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-        const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
-        window.scrollTo(0, run);
-        if (timeElapsed < duration) requestAnimationFrame(animation);
-      };
-
-      const easeInOutCubic = (t, b, c, d) => {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t * t + b;
-        t -= 2;
-        return c / 2 * (t * t * t + 2) + b;
-      };
-
-      requestAnimationFrame(animation);
-    };
-
-    // Add smooth scrolling to all anchor links
-    const handleSmoothScroll = (e) => {
-      const target = e.target.getAttribute('href');
-      if (target && target.startsWith('#')) {
-        e.preventDefault();
-        smoothScrollTo(target);
-      }
-    };
-
-    // Add event listeners
-    document.addEventListener('click', handleSmoothScroll);
-    
-    // Cleanup
-    return () => {
-      document.removeEventListener('click', handleSmoothScroll);
-    };
-  }, []);
-
   return (
-    <div className="container mx-auto max-w-7xl">
+    <div style={{ background: "#0a0a0a", minHeight: "100vh" }}>
       <Navbar />
       <Hero />
-      
-      <Suspense fallback={<Loader />}>
+
+      <Suspense fallback={<SectionLoader />}>
         <About />
       </Suspense>
-      
-      <Suspense fallback={<Loader />}>
+
+      <Suspense fallback={<SectionLoader />}>
         <Projects />
       </Suspense>
-      
-      <Suspense fallback={<Loader />}>
+
+      <Suspense fallback={<SectionLoader />}>
+        <TechStack />
+      </Suspense>
+
+      <Suspense fallback={<SectionLoader />}>
         <Experiences />
       </Suspense>
-      
-      <Suspense fallback={<Loader />}>
+
+      <Suspense fallback={<SectionLoader />}>
+        <GitHub />
+      </Suspense>
+
+      <Suspense fallback={<SectionLoader />}>
         <Contact />
       </Suspense>
-      
-      <Suspense fallback={<Loader />}>
-        <Footer/>
+
+      <Suspense fallback={<SectionLoader />}>
+        <Footer />
       </Suspense>
     </div>
   );
 };
 
-export default React.memo(App); 
+export default App;

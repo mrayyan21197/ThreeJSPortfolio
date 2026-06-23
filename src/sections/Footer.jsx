@@ -1,59 +1,122 @@
+import { Github, Linkedin, Mail } from "lucide-react";
 import { mySocials } from "../constants";
-import { Github, Linkedin, Twitter, Mail, ExternalLink } from "lucide-react";
-import { Particles } from "../components/Particles";
+
+const getIcon = (name) => {
+  switch (name.toLowerCase()) {
+    case "github":
+      return <Github style={{ width: "16px", height: "16px" }} />;
+    case "linkedin":
+      return <Linkedin style={{ width: "16px", height: "16px" }} />;
+    case "email":
+      return <Mail style={{ width: "16px", height: "16px" }} />;
+    default:
+      return null;
+  }
+};
 
 const Footer = () => {
-  // Function to get the appropriate icon for each social
-  const getSocialIcon = (name) => {
-    switch (name.toLowerCase()) {
-      case 'github':
-        return <Github className="w-5 h-5 hover:text-blue-400 transition-colors" />;
-      case 'linkedin':
-        return <Linkedin className="w-5 h-5 hover:text-blue-600 transition-colors" />;
-      case 'twitter':
-        return <Twitter className="w-5 h-5 hover:text-blue-400 transition-colors" />;
-      case 'email':
-        return <Mail className="w-5 h-5 hover:text-red-400 transition-colors" />;
-      default:
-        return <ExternalLink className="w-5 h-5 hover:text-gray-300 transition-colors" />;
-    }
-  };
-
   return (
-    <section className="relative c-space">
-      {/* Background Particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        <Particles />
-      </div>
-      
-      {/* Content */}
-      <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-5 pb-3 text-sm text-neutral-400">
-        <div className="mb-4 bg-gradient-to-r from-transparent via-neutral-700 to-transparent h-[1px] w-full" />
-        
-        <div className="flex gap-3 sm:gap-4 text-xs order-3 sm:order-1">
-          <a href="#" className="hover:text-white transition-colors">Terms & Conditions</a>
-          <span className="text-neutral-600">|</span>
-          <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-        </div>
-        
-        <div className="flex gap-3 sm:gap-4 order-2">
-          {mySocials.map((social, index) => (
-            <a 
-              href={social.href} 
-              key={index}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-neutral-800 transition-all duration-200 group"
-              title={social.name}
+    <footer
+      style={{
+        background: "#080808",
+        borderTop: "1px solid #212121",
+        padding: "40px 0 24px",
+      }}
+    >
+      <div
+        className="max-sm:px-6"
+        style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 64px" }}
+      >
+        {/* Top row */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-8">
+          {/* Left: branding */}
+          <div>
+            <div
+              style={{
+                fontFamily: "'Sora', sans-serif",
+                fontWeight: 700,
+                fontSize: "15px",
+                color: "#f2f2f2",
+                letterSpacing: "-0.02em",
+              }}
             >
-              {getSocialIcon(social.name)}
-            </a>
-          ))}
+              Rayyan
+            </div>
+            <div
+              style={{
+                color: "#6b6b6b",
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "10px",
+                marginTop: "2px",
+              }}
+            >
+              Full-Stack Developer
+            </div>
+          </div>
+
+          {/* Right: social icons */}
+          <div className="flex items-center gap-5">
+            {mySocials.map((social) => {
+              const icon = getIcon(social.name);
+              if (!icon) return null;
+              return (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={social.name}
+                  style={{
+                    color: "#6b6b6b",
+                    textDecoration: "none",
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#22d472")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#6b6b6b")}
+                >
+                  {icon}
+                </a>
+              );
+            })}
+          </div>
         </div>
-        
-        <p className="text-xs order-1 sm:order-3">© 2025 Rayyan. All rights reserved.</p>
+
+        {/* Bottom row */}
+        <div
+          style={{ borderTop: "1px solid #212121", paddingTop: "20px" }}
+          className="flex flex-col sm:flex-row items-center justify-between gap-3"
+        >
+          <p
+            style={{
+              color: "#6b6b6b",
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "10px",
+            }}
+          >
+            © 2025 Rayyan. All rights reserved.
+          </p>
+          <div className="flex gap-6">
+            {["Terms & Conditions", "Privacy Policy"].map((label) => (
+              <a
+                key={label}
+                href="#"
+                style={{
+                  color: "#6b6b6b",
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: "10px",
+                  textDecoration: "none",
+                  transition: "color 0.2s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#f2f2f2")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#6b6b6b")}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
-    </section>
+    </footer>
   );
 };
 
